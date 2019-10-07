@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="-31dp"
+        tools:layout_editor_absoluteY="-58dp">
+
+        <Button
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start"
+            tools:layout_editor_absoluteX="24dp"
+            tools:layout_editor_absoluteY="48dp"
+            tools:text="start" />
+
+        <Button
+            android:id="@+id/connexion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Connexion"
+            tools:layout_editor_absoluteX="24dp"
+            tools:layout_editor_absoluteY="113dp"
+            tools:text="connexion" />
+
+        <Button
+            android:id="@+id/deconnexion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deconnexion"
+            tools:layout_editor_absoluteX="24dp"
+            tools:layout_editor_absoluteY="177dp"
+            tools:text="deconnexion" />
+
+        <Button
+            android:id="@+id/stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stop"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="239dp"
+            tools:text="stop" />
+
+        <EditText
+            android:id="@+id/txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            tools:layout_editor_absoluteX="28dp"
+            tools:layout_editor_absoluteY="334dp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
