@@ -22,12 +22,14 @@ import java.util.TimerTask;
 public class BackgroundService extends Service implements IBackgroundService {
     private Timer timer;
     private boolean onStart;
+    private BackgroundServiceBinder binder;
     private ArrayList<IBackgroundServiceListener> listeners;
 
     @Override
     public void onCreate() {
         super.onCreate();
         timer = new Timer();
+        binder = new BackgroundServiceBinder(this);
         listeners = new ArrayList<>();
         Log.d(this.getClass().getName(), "onCreate");
     }
@@ -45,6 +47,8 @@ public class BackgroundService extends Service implements IBackgroundService {
                     ldt.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
 
                     Log.d("Heure : ",ldt.toString());
+
+                    fireDataChanged(ldt);
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -67,7 +71,7 @@ public class BackgroundService extends Service implements IBackgroundService {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        return binder;
     }
 
     @Override

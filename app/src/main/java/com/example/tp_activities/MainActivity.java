@@ -14,16 +14,18 @@ import java.time.LocalDateTime;
 
 public class MainActivity extends AppCompatActivity  implements View.OnClickListener, IBackgroundServiceListener {
 
-    BackgroundService service;
-
-    Button start;
+0   Button start;
     Button connexion;
     Button deconnexion;
     Button stop;
 
+    ServiceConnection connection;
+
     EditText txt;
 
     Intent in;
+
+    IBackgroundService service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,30 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         //Init intent service
         in = new Intent(this, BackgroundService.class);
 
+
+        IBackgroundServiceListener listener = new IBackgroundServiceListener() {
+            public void dataChanged(final Object data) {
+                VotreActivity.this.runOnUiThread(new Runnable() {
+                    public void run() {
+                        dataChanged(data);
+                    }
+                });
+            }
+        };
+
+        //Création de l’objet Connexion
+        connection = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder service) {
+                Log.i("BackgroundService", "Connected!");
+                service =
+                        ((BackgroundServiceBinder)service).getService();
+                service.addListener(listener);
+            }
+            public void onServiceDisconnected(ComponentName name) {
+                Log.i("BackgroundService", "Disconnected!");
+            }
+        };
         //Get view items
         start = findViewById(R.id.start);
         connexion = findViewById(R.id.connexion);
@@ -56,13 +82,13 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
     public void onClick(View view) {
         if (start.equals((Button) view)) {
             startService(in);
-            BackgroundService = (LocalService.lo)
         }
         else if (connexion.equals((Button)view)){
-
+            bindService(in, connection, BIND_AUTO_CREATE);
         }
         else if (deconnexion.equals((Button) view)){
-
+            unbindService(connection);
+            service.removeListener();
         }
         else
         {
